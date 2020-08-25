@@ -11,9 +11,10 @@ export const searchImageByText = async (text: string, page: number) : Promise<an
             }
         )
         data = await data.json();
-        const { photos, stat } = data;
+        const { photos, stat, messages } = data;
         if (stat !== 'ok')
-            throw new Error(stat);
+            // error message
+            throw messages;
         data = photos?.photo.map(ele => {
             const { farm, server, id, secret } = ele;
             const url = `https://farm${farm}.static.flickr.com/${server}/${id}_${secret}.jpg`
