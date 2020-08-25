@@ -10,7 +10,6 @@ export const searchImageByText = async (text: string, page: number) : Promise<an
                 jsonpCallbackFunction: 'jsonFlickrApi'
             }
         )
-        console.log(await data.json());
         data = await data.json();
         const { photos, stat } = data;
         if (stat !== 'ok')

@@ -20,7 +20,6 @@ function App({}: AppProps) {
     setLoading(true);
     searchImageByText(text, 1)
     .then((newData) => {
-      debugger;
       setData(newData);
       setPage(1);
     })
