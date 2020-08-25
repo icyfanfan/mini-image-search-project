@@ -1,4 +1,4 @@
-import React,{ useEffect, useState } from 'react';
+import React,{ useState } from 'react';
 
 interface SearchBoxProps {
     onSearch: Function;
@@ -13,6 +13,10 @@ const SearchBox = ({ onSearch }: SearchBoxProps) => {
                 setValue(e.target.value);
             }} />
             <button onClick={() => {
+                if (!value) {
+                    // TODO: notify user, forbid empty text 
+                    return;
+                }
                 onSearch(value);
             }}>Click to Search!</button>
         </div>

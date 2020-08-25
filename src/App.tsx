@@ -11,6 +11,7 @@ function App({}: AppProps) {
   const [text, setText] = useState('');
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
+  // TODO: loading status
   const [loading, setLoading] = useState(false);
 
   // begin a new search
@@ -48,7 +49,6 @@ function App({}: AppProps) {
     })
   }, [page]);
   
-
   return (
     <div className="App">
       <SearchBox onSearch={(text: string) => {

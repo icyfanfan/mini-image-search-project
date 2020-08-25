@@ -13,7 +13,7 @@ export const searchImageByText = async (text: string, page: number) : Promise<an
         data = await data.json();
         const { photos, stat } = data;
         if (stat !== 'ok')
-            throw new Error('error');
+            throw new Error(stat);
         data = photos?.photo.map(ele => {
             const { farm, server, id, secret } = ele;
             const url = `https://farm${farm}.static.flickr.com/${server}/${id}_${secret}.jpg`
@@ -23,7 +23,7 @@ export const searchImageByText = async (text: string, page: number) : Promise<an
             }
         });
     } catch (error) {
-        // noop
+        // TODO: notify user
     }
     return data;
 }
