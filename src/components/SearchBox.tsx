@@ -14,7 +14,7 @@ const SearchBox = ({ disabled, onSearch }: SearchBoxProps) => {
       <Input value={value} onChange={(e) => {
         setValue(e.target.value);
       }} className="searchBox_input"/>
-      <Button disabled={disabled} onClick={() => {
+      <Button type="primary" disabled={disabled} onClick={() => {
         if (!value) {
           message.warn('Search text should not be empty!');
           return;
