@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { Button } from 'antd';
 
 interface DisplayContainerProps {
     data: any;
@@ -7,7 +8,7 @@ interface DisplayContainerProps {
 
 const DisplayContainer = ({ data, onNextPage }: DisplayContainerProps) => {
     return (
-        <div className="DisplayContainer">
+        <div className="displayContainer">
             <ul>
                 {data.map(ele => (
                     <li key={`${ele.id}_${ele.secret}_${ele.servet}_${ele.farm}`}>
@@ -17,9 +18,9 @@ const DisplayContainer = ({ data, onNextPage }: DisplayContainerProps) => {
                 )}
                 {
                     data.length>0&&(
-                        <button onClick={() => {
+                        <Button onClick={() => {
                             onNextPage();
-                        }}>Show more</button>
+                        }} className="container_button">Show more</Button>
                     )
                 }
             </ul>

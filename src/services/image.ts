@@ -1,5 +1,6 @@
 
 import fetchJsonp from 'fetch-jsonp';
+import { message } from 'antd';
 
 export const searchImageByText = async (text: string, page: number) : Promise<any[]> => {
     let data = [];
@@ -24,7 +25,8 @@ export const searchImageByText = async (text: string, page: number) : Promise<an
             }
         });
     } catch (error) {
-        // TODO: notify user
+        // notify user
+        message.error(error);
     }
     return data;
 }

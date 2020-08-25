@@ -1,4 +1,5 @@
 import React,{ useState } from 'react';
+import { Input, Button, message } from 'antd';
 
 interface SearchBoxProps {
     onSearch: Function;
@@ -8,17 +9,17 @@ const SearchBox = ({ onSearch }: SearchBoxProps) => {
     const [value, setValue] = useState('');
 
     return (
-        <div>
-            <input value={value} onChange={(e) => {
+        <div className="searchBox">
+            <Input value={value} onChange={(e) => {
                 setValue(e.target.value);
-            }} />
-            <button onClick={() => {
+            }} className="searchBox_input"/>
+            <Button onClick={() => {
                 if (!value) {
-                    // TODO: notify user, forbid empty text 
+                    message.warn('Search text should not be empty!');
                     return;
                 }
                 onSearch(value);
-            }}>Click to Search!</button>
+            }}>Click to Search!</Button>
         </div>
     )
 }

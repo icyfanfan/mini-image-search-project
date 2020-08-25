@@ -1,4 +1,6 @@
 import React,{ useEffect, useState } from 'react';
+import { Typography, Spin } from 'antd';
+
 import SearchBox from './components/SearchBox';
 import DisplayContainer from './components/DisplayContainer';
 
@@ -7,11 +9,13 @@ import './App.css';
 
 interface AppProps {}
 
+const { Title } = Typography;
+
 function App({}: AppProps) {
   const [text, setText] = useState('');
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
-  // TODO: loading status
+  // loading status
   const [loading, setLoading] = useState(false);
 
   // begin a new search
@@ -50,13 +54,16 @@ function App({}: AppProps) {
   }, [page]);
   
   return (
-    <div className="App">
+    <div className="app">
+      <Title>Image Search</Title>
       <SearchBox onSearch={(text: string) => {
         setText(text);
       }} />
-      <DisplayContainer data={data} onNextPage={() => {
-        setPage(prePage => prePage + 1);
-      }} />
+      <Spin spinning={loading}>
+        <DisplayContainer data={data} onNextPage={() => {
+          setPage(prePage => prePage + 1);
+        }} />
+      </Spin>
     </div>
   );
 }

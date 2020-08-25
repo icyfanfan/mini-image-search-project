@@ -1,15 +1,25 @@
-.App {
+.app {
   text-align: center;
   display: flex;
   flex-direction: column;
 }
 
-.DisplayContainer {
-  flex-grow: 1;
+.searchBox {
   display: flex;
+  padding: 0 20px;
 }
 
-.DisplayContainer ul {
+.searchBox_input {
+  margin-right: 20px;
+}
+
+.displayContainer {
+  flex-grow: 1;
+  display: flex;
+  padding: 20px;
+}
+
+.displayContainer ul {
   width: 100%;
   overflow-y: auto;
   display: flex;
@@ -17,17 +27,17 @@
   align-content: flex-start;
 }
 
-.DisplayContainer li {
+.displayContainer li {
   box-sizing: border-box;
   flex: 0 0 25%;
-  list-style-type: none;
 }
 
-.DisplayContainer button{
+.container_button{
   flex: 0 0 100%;
+  margin-top: 20px;
 }
 
-.DisplayContainer img {
+.displayContainer img {
   width: 100%;
   height: auto;
 }
