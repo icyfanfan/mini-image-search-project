@@ -1,10 +1,11 @@
-import React,{ useEffect, useState, useCallback } from 'react';
+import React,{ useCallback } from 'react';
 import { Typography, Spin, message } from 'antd';
 
 import SearchBox from './components/SearchBox';
 import DisplayContainer from './components/DisplayContainer';
 
 import { searchImageByText } from './services/image';
+import useImageSearch from './hooks/useImageSearch';
 import './App.css';
 
 interface AppProps {}
@@ -12,12 +13,6 @@ interface AppProps {}
 const { Title } = Typography;
 
 function App({}: AppProps) {
-  const [text, setText] = useState('');
-  const [page, setPage] = useState(1);
-  const [data, setData] = useState([]);
-  // loading status
-  const [loading, setLoading] = useState(false);
-
   const search = useCallback((text, page, cb) => {
     setLoading(true);
     searchImageByText(text, page)
@@ -33,24 +28,16 @@ function App({}: AppProps) {
     })
   }, [])
 
-  // begin a new search
-  useEffect(() => {
-    if(!text)
-      return;
-    search(text, 1, (newData) => {
-      setData(newData);
-      setPage(1);
-    });
-  }, [text]);
-
-  // search for more pages
-  useEffect(() => {
-    if(!text || page === 1)
-      return;
-    search(text, page, (newData) => {
-      setData((preData) => [...preData, ...newData]);
-    });
-  }, [page]);
+  const { 
+    text,
+    page,
+    data,
+    loading,
+    setText,
+    nextPage,
+    setData,
+    setLoading
+  } = useImageSearch(search);
   
   return (
     <div className="app">
@@ -59,9 +46,7 @@ function App({}: AppProps) {
         setText(text);
       }} />
       <Spin spinning={loading}>
-        <DisplayContainer data={data} onNextPage={() => {
-          setPage(prePage => prePage + 1);
-        }} />
+        <DisplayContainer data={data} onNextPage={nextPage} />
       </Spin>
     </div>
   );
